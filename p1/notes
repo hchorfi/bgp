@@ -1,0 +1,15 @@
+# ATTENTION:                                                                                    
+## Do not make these mistakes
+    -> do not configure the router container with a starter command `sh`
+    -> make sure the init process is `/sbin/tini -- /usr/lib/frr/docker-start`
+    -> don't create daemon config files or update the permissions as the documentation says, `/etc/frr/daemons`
+
+- Since i'm using an arm chip with mac os all images should be built inside the GNS3 VM, for linux they can built on the same host where GNS3 program installed.
+- i'm using frrouting/frr:v8.4.1 (last image uses linux/arm64) instead of :latest tag
+
+- build images
+    `docker build -t hchorfi-r -f hchorfi-r.Dockerfile .`
+    `docker build -t hchorfi-h -f hchorfi-h.Dockerfile .`
+
+- rsync files to gns3 vm
+    `rsync -avz ~/devza/bgp/ gns3@172.16.9.142:/home/gns3/bgp/`
