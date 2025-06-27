@@ -1,0 +1,6 @@
+FROM alpine
+
+RUN apk update && \
+    apk add busybox iproute2 iputils
+
+CMD ["/bin/sh"]

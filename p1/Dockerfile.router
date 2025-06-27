@@ -1,0 +1,6 @@
+FROM alpine
+
+RUN apk update && \
+    apk add frr iproute2 iputils
+
+CMD ["/bin/sh"]
