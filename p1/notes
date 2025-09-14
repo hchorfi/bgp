@@ -10,3 +10,6 @@
 - build images
     `docker build -t hchorfi-r -f hchorfi-r.Dockerfile .`
     `docker build -t hchorfi-h -f hchorfi-h.Dockerfile .`
+
+- rsync files to gns3 vm
+    `rsync -avz ~/devza/bgp/ gns3@172.16.9.142:/home/gns3/bgp/`
