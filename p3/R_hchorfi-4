@@ -1,0 +1,32 @@
+### ospf config
+
+/ # vtysh
+_hchorfi-4# conf t
+_hchorfi-4(config)# interface eth0
+_hchorfi-4(config-if)# ip address 10.1.1.10/30
+_hchorfi-4(config-if)# ip ospf area 0
+_hchorfi-4(config-if)# interface lo
+_hchorfi-4(config-if)# ip address 1.1.1.4/32
+_hchorfi-4(config-if)# ip ospf area 0
+_hchorfi-4(config-if)# router ospf
+_hchorfi-4(config-router)# do show ip route
+
+### bgp config
+_hchorfi-4(config-router)# router bgp 1
+_hchorfi-4(config-router)# neighbor 1.1.1.1 remote-as 1
+_hchorfi-4(config-router)# neighbor 1.1.1.1 update-source lo
+
+### bgp-evpn config
+_hchorfi-4(config-router)# address-family l2vpn evpn
+_hchorfi-4(config-router-af)# neighbor 1.1.1.1 activate
+_hchorfi-4(config-router-af)# advertise-all-vni
+_hchorfi-4(config-router-af)# exit-address-family
+
+### vxlan & bridging config
+/ # ip link add br0 type bridge
+/ # ip link set dev br0 up
+/ # ip link add vxlan10 type vxlan id 10 dstport 4789
+/ # ip link set dev vxlan10 up
+/ # brctl addif br0 vxlan10
+/ # brctl addif br0 eth1
+ 
