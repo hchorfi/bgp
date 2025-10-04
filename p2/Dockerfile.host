@@ -1,0 +1,7 @@
+FROM alpine
+
+# Install necessary packages for VXLAN configuration
+RUN apk update && \
+    apk add busybox iproute2 iputils bridge-utils
+
+CMD ["/bin/sh"]
