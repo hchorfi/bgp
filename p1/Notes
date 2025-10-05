@@ -1,0 +1,5 @@
+### build images
+
+docker build -t hchorfi-r -f hchorfi-r.Dockerfile .
+docker build -t hchorfi-h -f hchorfi-h.Dockerfile .
+

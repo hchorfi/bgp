@@ -1,31 +1,31 @@
 ### ospf config
 
-/ # vtysh
-_hchorfi-1# conf t
-_hchorfi-1(config)# interface eth0
-_hchorfi-1(config-if)# ip address 10.1.1.1/30
-_hchorfi-1(config-if)# ip ospf area 0
-_hchorfi-1(config-if)# interface eth1
-_hchorfi-1(config-if)# ip address 10.1.1.5/30
-_hchorfi-1(config-if)# ip ospf area 0
-_hchorfi-1(config-if)# interface eth2
-_hchorfi-1(config-if)# ip address 10.1.1.9/30
-_hchorfi-1(config-if)# ip ospf area 0
-_hchorfi-1(config-if)# interface lo
-_hchorfi-1(config-if)# ip address 1.1.1.1/32
-_hchorfi-1(config-if)# ip ospf area 0
-_hchorfi-1(config-if)# router ospf
-_hchorfi-1(config-router)# do show ip route
+vtysh
+conf t
+interface eth0
+ip address 10.1.1.1/30
+ip ospf area 0
+interface eth1
+ip address 10.1.1.5/30
+ip ospf area 0
+interface eth2
+ip address 10.1.1.9/30
+ip ospf area 0
+interface lo
+ip address 1.1.1.1/32
+ip ospf area 0
+router ospf
+do show ip route
 
 ### bgp config
-_hchorfi-1(config)# router bgp 1
-_hchorfi-1(config-router)# neighbor ibgp peer-group
-_hchorfi-1(config-router)# neighbor ibgp remote-as 1
-_hchorfi-1(config-router)# neighbor ibgp update-source lo
-_hchorfi-1(config-router)# bgp listen range 1.1.1.0/29 peer-group ibgp
+router bgp 1
+neighbor ibgp peer-group
+neighbor ibgp remote-as 1
+neighbor ibgp update-source lo
+bgp listen range 1.1.1.0/29 peer-group ibgp
 
 ### bgp-evpn config
-_hchorfi-1(config-router)# address-family l2vpn evpn
-_hchorfi-1(config-router-af)# neighbor ibgp activate
-_hchorfi-1(config-router-af)# neighbor ibgp route-reflector-client
-_hchorfi-1(config-router-af)# exit-address-family
+address-family l2vpn evpn
+neighbor ibgp activate
+neighbor ibgp route-reflector-client
+exit-address-family
