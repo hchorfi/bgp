@@ -1,9 +1,17 @@
 bash
+### Assingn ip address to interface eth0
 ip addr add 10.1.1.1/24 dev eth0
+### Creates a VXLAN interface vxlan10 with unicast tunneling
 ip link add name vxlan10 type vxlan id 10 dev eth0 local 10.1.1.1 remote 10.1.1.2 dstport 4789
+### Creates a VXLAN interface vxlan10 with multicast tunneling
 #ip link add name vxlan10 type vxlan id 10 dev eth0 group 239.1.1.1 dstport 4789
+### Enables the vxlan10 interface
 ip link set dev vxlan10 up
+### Creates a bridge br0
 ip link add br0 type bridge
+### Brings up the bridge
 ip link set dev br0 up
+### Adds eth1 to the bridge
 brctl addif br0 eth1
+### Adds vxlan10 to the bridge
 brctl addif br0 vxlan10

@@ -1,7 +1,8 @@
-### ospf config
-
+### Enter configuration mode
 vtysh
 conf t
+
+### Assign IP to interface and enable OSPF in Area 0
 interface eth0
 ip address 10.1.1.1/30
 ip ospf area 0
@@ -14,17 +15,22 @@ ip ospf area 0
 interface lo
 ip address 1.1.1.1/32
 ip ospf area 0
-router ospf
-do show ip route
 
-### bgp config
+### Start OSPF routing process
+router ospf
+
+### Start BGP with AS number 1
 router bgp 1
+
+### Define an iBGP peer group using loopback for peering
 neighbor ibgp peer-group
 neighbor ibgp remote-as 1
 neighbor ibgp update-source lo
+
+### Automatically form iBGP sessions with peers in 1.1.1.0/29
 bgp listen range 1.1.1.0/29 peer-group ibgp
 
-### bgp-evpn config
+### Enable l2vpn
 address-family l2vpn evpn
 neighbor ibgp activate
 neighbor ibgp route-reflector-client
