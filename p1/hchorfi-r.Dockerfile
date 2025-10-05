@@ -1,3 +1,4 @@
-FROM frrouting/frr:v8.4.1
+FROM frrouting/frr:latest
 
 COPY daemons.conf /etc/frr/daemons
+
